@@ -21,16 +21,16 @@ fetch('https://jsonplaceholder.typicode.com/todos/1/posts')
 fetch('https://jsonplaceholder.typicode.com/todos/1/users')
       .then(response => response.json())
       .then((json) => {
-            const users = json.map((user) => ({
+            const users = json
+            .map((user) => ({             // Cambiamos todas las ciudades de los usuarios a Madrid
                   ...user,
                   address: {
                         ...user.address,
                         city: 'Madrid'
                   }
             }))
+            .filter((user) => user.address.suite.includes('Suite'))     // Filtramos las direcciones para obtener usuarios que se hospeden en Suites
+            .sort((a, b) => a.name > b.name ? 1 : -1)                   // Ordenamos a los usuarios por orden alfabético
             console.log(users)
-      })
-      .then((json) =>{
-            
       })
       
